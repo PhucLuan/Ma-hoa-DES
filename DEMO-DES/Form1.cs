@@ -27,7 +27,7 @@ namespace DEMO_DES
                
             }
             else
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin");
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!!!");
         }
     }
 }
