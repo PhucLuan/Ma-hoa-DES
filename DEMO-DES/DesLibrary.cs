@@ -29,6 +29,7 @@ namespace MaHoaDES
                 46, 14, 54, 22, 62, 30, 37, 5, 45, 13, 53, 21, 61, 29, 36, 4, 44, 12, 52, 20, 60, 28, 35, 3,
                 43, 11, 51, 19, 59, 27, 34, 2, 42, 10, 50, 18, 58, 26, 33, 1, 41, 9, 49, 17, 57, 25 };
         #endregion
+        //Mã hóa
         public static string EncrpytionDES(string K, string _M)
         {
             string C = "";
@@ -44,6 +45,43 @@ namespace MaHoaDES
             string R = "";
             string[] ListKey = ListKeys(K, pc1, pc2);
             for (int i = 0; i < 16; i++)
+            {
+                L = tmtR;//L = R tmt
+                string E_R0 = transposition(tmtR, E);//Mở rộng nữa phải
+                                                     //XOR Khóa
+                                                     //ListKey(K);
+                string K1 = ListKey[i];
+                string A = XORBIT(E_R0, K1);
+                //Thế S-BOX
+                string SB = SBOX(A);
+                //Hoán vị P(B)
+
+                string PB = transposition(cvtHextToBina(SB), P);
+                //R1=P(B) xor L0
+                R = XORBIT(PB, tmtL);
+                tmtL = L;
+                tmtR = R;
+            }
+            C = cvtBinaToHex(transposition(R + L, IP1));
+            return C;
+        }
+
+        //Giải mã
+        public static string DecrpytionDES(string K, string _M)
+        {
+            string C = "";
+
+
+            string M = cvtHextToBina(_M);
+            string IPM = transposition(M, IP); //Chuyển vị IP
+            string L0 = IPM.Substring(0, 32);
+            string R0 = IPM.Substring(32, 32);
+            string tmtL = L0;
+            string tmtR = R0;
+            string L = "";
+            string R = "";
+            string[] ListKey = ListKeys(K, pc1, pc2);
+            for (int i = 15; i >= 0; i--)
             {
                 L = tmtR;//L = R tmt
                 string E_R0 = transposition(tmtR, E);//Mở rộng nữa phải

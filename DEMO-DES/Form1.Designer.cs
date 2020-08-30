@@ -36,7 +36,9 @@
             this.txtKey = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtResult = new System.Windows.Forms.TextBox();
-            this.btnEncrpytion = new System.Windows.Forms.Button();
+            this.btnResult = new System.Windows.Forms.Button();
+            this.radioEncryp = new System.Windows.Forms.RadioButton();
+            this.radioDecryp = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,7 +87,7 @@
             this.txtBanRo.Location = new System.Drawing.Point(208, 105);
             this.txtBanRo.Multiline = true;
             this.txtBanRo.Name = "txtBanRo";
-            this.txtBanRo.Size = new System.Drawing.Size(221, 38);
+            this.txtBanRo.Size = new System.Drawing.Size(250, 38);
             this.txtBanRo.TabIndex = 3;
             this.txtBanRo.Text = "0123456789ABCDEF";
             this.txtBanRo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -96,16 +98,15 @@
             this.txtKey.Location = new System.Drawing.Point(208, 181);
             this.txtKey.Multiline = true;
             this.txtKey.Name = "txtKey";
-            this.txtKey.Size = new System.Drawing.Size(221, 38);
+            this.txtKey.Size = new System.Drawing.Size(250, 38);
             this.txtKey.TabIndex = 4;
-            this.txtKey.Text = "133457799BBCDFF1";
             this.txtKey.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(41, 315);
+            this.label4.Location = new System.Drawing.Point(41, 349);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(94, 25);
             this.label4.TabIndex = 5;
@@ -113,28 +114,54 @@
             // 
             // txtResult
             // 
-            this.txtResult.Location = new System.Drawing.Point(208, 302);
+            this.txtResult.Location = new System.Drawing.Point(208, 336);
             this.txtResult.Multiline = true;
             this.txtResult.Name = "txtResult";
-            this.txtResult.Size = new System.Drawing.Size(221, 38);
+            this.txtResult.Size = new System.Drawing.Size(250, 38);
             this.txtResult.TabIndex = 6;
             // 
-            // btnEncrpytion
+            // btnResult
             // 
-            this.btnEncrpytion.Location = new System.Drawing.Point(272, 245);
-            this.btnEncrpytion.Name = "btnEncrpytion";
-            this.btnEncrpytion.Size = new System.Drawing.Size(91, 33);
-            this.btnEncrpytion.TabIndex = 7;
-            this.btnEncrpytion.Text = "Mã hóa";
-            this.btnEncrpytion.UseVisualStyleBackColor = true;
-            this.btnEncrpytion.Click += new System.EventHandler(this.btnEncrpytion_Click);
+            this.btnResult.Location = new System.Drawing.Point(208, 282);
+            this.btnResult.Name = "btnResult";
+            this.btnResult.Size = new System.Drawing.Size(91, 33);
+            this.btnResult.TabIndex = 7;
+            this.btnResult.Text = "Submit";
+            this.btnResult.UseVisualStyleBackColor = true;
+            this.btnResult.Click += new System.EventHandler(this.btnEncrpytion_Click);
+            // 
+            // radioEncryp
+            // 
+            this.radioEncryp.AutoSize = true;
+            this.radioEncryp.Location = new System.Drawing.Point(208, 240);
+            this.radioEncryp.Name = "radioEncryp";
+            this.radioEncryp.Size = new System.Drawing.Size(61, 17);
+            this.radioEncryp.TabIndex = 8;
+            this.radioEncryp.TabStop = true;
+            this.radioEncryp.Text = "Mã hóa";
+            this.radioEncryp.UseVisualStyleBackColor = true;
+            this.radioEncryp.CheckedChanged += new System.EventHandler(this.radioEncryp_CheckedChanged);
+            // 
+            // radioDecryp
+            // 
+            this.radioDecryp.AutoSize = true;
+            this.radioDecryp.Location = new System.Drawing.Point(344, 240);
+            this.radioDecryp.Name = "radioDecryp";
+            this.radioDecryp.Size = new System.Drawing.Size(60, 17);
+            this.radioDecryp.TabIndex = 9;
+            this.radioDecryp.TabStop = true;
+            this.radioDecryp.Text = "Giải mã";
+            this.radioDecryp.UseVisualStyleBackColor = true;
+            this.radioDecryp.CheckedChanged += new System.EventHandler(this.radioDecryp_CheckedChanged);
             // 
             // DES_Encrpytion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(594, 450);
-            this.Controls.Add(this.btnEncrpytion);
+            this.Controls.Add(this.radioDecryp);
+            this.Controls.Add(this.radioEncryp);
+            this.Controls.Add(this.btnResult);
             this.Controls.Add(this.txtResult);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtKey);
@@ -145,6 +172,7 @@
             this.Name = "DES_Encrpytion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DES_Encrpytion";
+            this.Load += new System.EventHandler(this.DES_Encrpytion_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -162,7 +190,9 @@
         private System.Windows.Forms.TextBox txtKey;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtResult;
-        private System.Windows.Forms.Button btnEncrpytion;
+        private System.Windows.Forms.Button btnResult;
+        private System.Windows.Forms.RadioButton radioEncryp;
+        private System.Windows.Forms.RadioButton radioDecryp;
     }
 }
 

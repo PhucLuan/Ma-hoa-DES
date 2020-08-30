@@ -21,13 +21,53 @@ namespace DEMO_DES
         
         private void btnEncrpytion_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtBanRo.Text) == false && string.IsNullOrEmpty(txtKey.Text) == false)
+
+            if (radioEncryp.Checked == true)
             {
-                txtResult.Text = DesLibrary.EncrpytionDES(txtKey.Text.ToString(), txtBanRo.Text.ToString());
-               
+                if (string.IsNullOrEmpty(txtBanRo.Text) == false && string.IsNullOrEmpty(txtKey.Text) == false)
+                {
+                    txtResult.Text = DesLibrary.EncrpytionDES(txtKey.Text.ToString(), txtBanRo.Text.ToString());
+
+                }
+                else
+                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin bản rõ và khóa");
             }
-            else
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin bản rõ và khóa");
+            if (radioDecryp.Checked == true)
+            {
+                if (string.IsNullOrEmpty(txtBanRo.Text) == false && string.IsNullOrEmpty(txtKey.Text) == false)
+                {
+                    txtResult.Text = DesLibrary.DecrpytionDES(txtKey.Text.ToString(), txtBanRo.Text.ToString());
+
+                }
+                else
+                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin bản rõ và khóa");
+            }
+
+        }
+
+        private void radioEncryp_CheckedChanged(object sender, EventArgs e)
+        {
+            label2.Text = "Nhập bản rõ M";
+            txtBanRo.Text = null;
+            txtBanRo.Enabled = true;
+            txtResult.Text = null;
+            btnResult.Enabled = true;
+        }
+
+        private void radioDecryp_CheckedChanged(object sender, EventArgs e)
+        {
+            label2.Text = "Nhập bản mã C";
+            txtBanRo.Text = null;
+            txtBanRo.Enabled = true;
+            txtResult.Text = null;
+            btnResult.Enabled = true;
+        }
+
+        private void DES_Encrpytion_Load(object sender, EventArgs e)
+        {
+            txtBanRo.Enabled = false;
+            txtBanRo.Text = "Chọn hình thức Mã hóa/ Giải mã";
+            btnResult.Enabled = false;
         }
     }
 }
