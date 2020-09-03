@@ -27,7 +27,7 @@ namespace DEMO_DES
                 if (string.IsNullOrEmpty(txtBanRo.Text) == false && string.IsNullOrEmpty(txtKey.Text) == false)
                 {
                     txtResult.Text = DesLibrary.EncrpytionDES(txtKey.Text.ToString(), txtBanRo.Text.ToString());
-
+                    showKeyLR();
                 }
                 else
                     MessageBox.Show("Vui lòng nhập đầy đủ thông tin bản rõ và khóa");
@@ -36,8 +36,10 @@ namespace DEMO_DES
             {
                 if (string.IsNullOrEmpty(txtBanRo.Text) == false && string.IsNullOrEmpty(txtKey.Text) == false)
                 {
+                    dgvKeyLR.Rows.Clear();
+                    dgvKeyLR.Columns.Clear();
                     txtResult.Text = DesLibrary.DecrpytionDES(txtKey.Text.ToString(), txtBanRo.Text.ToString());
-
+                    showKeyLR();
                 }
                 else
                     MessageBox.Show("Vui lòng nhập đầy đủ thông tin bản rõ và khóa");
@@ -86,6 +88,20 @@ namespace DEMO_DES
                 row.Cells[1].Value = DesLibrary.cvtBinaToHex(ListKeys[i]);
                 dgvListKey.Rows.Add(row);
             }            
+        }
+        void showKeyLR()
+        {
+            dgvKeyLR.ColumnCount = 3;
+            dgvKeyLR.Columns[0].Name = "i";
+            dgvKeyLR.Columns[1].Name = "K Left";
+            dgvKeyLR.Columns[2].Name = "K right";
+
+            int Length = DesLibrary.ListKL.Length;
+            for (int i = 0; i < Length; i++)
+            {
+                dgvKeyLR.Rows.Add(i, DesLibrary.ListKL[i], DesLibrary.ListKR[i]);
+            }
+            
         }
         private void GenKey_Click(object sender, EventArgs e)
         {

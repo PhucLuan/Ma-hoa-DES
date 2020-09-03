@@ -29,6 +29,9 @@ namespace MaHoaDES
                 46, 14, 54, 22, 62, 30, 37, 5, 45, 13, 53, 21, 61, 29, 36, 4, 44, 12, 52, 20, 60, 28, 35, 3,
                 43, 11, 51, 19, 59, 27, 34, 2, 42, 10, 50, 18, 58, 26, 33, 1, 41, 9, 49, 17, 57, 25 };
         #endregion
+
+        public static string[] ListKL = new string[17];
+        public static string[] ListKR = new string[17];
         //Mã hóa
         public static string EncrpytionDES(string K, string _M)
         {
@@ -43,9 +46,16 @@ namespace MaHoaDES
             string tmtR = R0;
             string L = "";
             string R = "";
+
+            Array.Clear(ListKL, 0, ListKL.Length);
+            Array.Clear(ListKR, 0, ListKL.Length);
+            ListKL[0] = cvtBinaToHex(tmtL);
+            ListKR[0] = cvtBinaToHex(tmtR);
+
             string[] ListKey = ListKeys(K);
             for (int i = 0; i < 16; i++)
             {
+                
                 L = tmtR;//L = R tmt
                 string E_R0 = transposition(tmtR, E);//Mở rộng nữa phải
                                                      //XOR Khóa
@@ -59,8 +69,12 @@ namespace MaHoaDES
                 string PB = transposition(cvtHextToBina(SB), P);
                 //R1=P(B) xor L0
                 R = XORBIT(PB, tmtL);
+                
                 tmtL = L;
                 tmtR = R;
+                ListKL[i + 1] = cvtBinaToHex(L);
+                ListKR[i + 1] = cvtBinaToHex(R);
+
             }
             C = cvtBinaToHex(transposition(R + L, IP1));
             return C;
@@ -69,9 +83,8 @@ namespace MaHoaDES
         //Giải mã
         public static string DecrpytionDES(string K, string _M)
         {
+            
             string C = "";
-
-
             string M = cvtHextToBina(_M);
             string IPM = transposition(M, IP); //Chuyển vị IP
             string L0 = IPM.Substring(0, 32);
@@ -80,6 +93,11 @@ namespace MaHoaDES
             string tmtR = R0;
             string L = "";
             string R = "";
+            Array.Clear(ListKL, 0, ListKL.Length);
+            Array.Clear(ListKR, 0, ListKL.Length);
+            ListKL[0] = cvtBinaToHex(tmtL);
+            ListKR[0] = cvtBinaToHex(tmtR);
+
             string[] ListKey = ListKeys(K);
             for (int i = 15; i >= 0; i--)
             {
@@ -96,8 +114,12 @@ namespace MaHoaDES
                 string PB = transposition(cvtHextToBina(SB), P);
                 //R1=P(B) xor L0
                 R = XORBIT(PB, tmtL);
+                
                 tmtL = L;
                 tmtR = R;
+
+                ListKL[i + 1] = cvtBinaToHex(L);
+                ListKR[i + 1] = cvtBinaToHex(R);
             }
             C = cvtBinaToHex(transposition(R + L, IP1));
             return C;
