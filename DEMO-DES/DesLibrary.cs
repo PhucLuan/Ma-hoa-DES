@@ -43,7 +43,7 @@ namespace MaHoaDES
             string tmtR = R0;
             string L = "";
             string R = "";
-            string[] ListKey = ListKeys(K, pc1, pc2);
+            string[] ListKey = ListKeys(K);
             for (int i = 0; i < 16; i++)
             {
                 L = tmtR;//L = R tmt
@@ -80,7 +80,7 @@ namespace MaHoaDES
             string tmtR = R0;
             string L = "";
             string R = "";
-            string[] ListKey = ListKeys(K, pc1, pc2);
+            string[] ListKey = ListKeys(K);
             for (int i = 15; i >= 0; i--)
             {
                 L = tmtR;//L = R tmt
@@ -110,7 +110,7 @@ namespace MaHoaDES
             return binarystring;
         }
         //Chuyển nhị phân sang Hex
-        static string cvtBinaToHex(string strBinary)
+        public static string cvtBinaToHex(string strBinary)
         {
             string strHex = Convert.ToInt64(strBinary, 2).ToString("X");
             return strHex;
@@ -198,7 +198,7 @@ namespace MaHoaDES
             return result;
         }
 
-        static string[] ListKeys(string K, int[] pc1, int[] pc2)
+        public static string[] ListKeys(string K)
         {
 
             string PC1K = transposition(cvtHextToBina(K), pc1);

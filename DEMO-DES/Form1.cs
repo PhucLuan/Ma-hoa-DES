@@ -68,6 +68,33 @@ namespace DEMO_DES
             txtBanRo.Enabled = false;
             txtBanRo.Text = "Chọn hình thức Mã hóa/ Giải mã";
             btnResult.Enabled = false;
+            radioEncryp.Enabled = false;
+            radioDecryp.Enabled = false;
+        }
+        void showKey()
+        {
+            dgvListKey.Columns.Add("C1", "i");
+            dgvListKey.Columns["C1"].DataPropertyName = "Property1";
+            dgvListKey.Columns.Add("C2", "Ki");
+            dgvListKey.Columns["C2"].DataPropertyName = "Property2";
+            string[] ListKeys = DesLibrary.ListKeys(txtKey.Text);
+            int Length = ListKeys.Length;
+            for (int i = 0; i < Length; i++)
+            {
+                DataGridViewRow row = (DataGridViewRow)dgvListKey.Rows[0].Clone();
+                row.Cells[0].Value = (i+1).ToString();
+                row.Cells[1].Value = DesLibrary.cvtBinaToHex(ListKeys[i]);
+                dgvListKey.Rows.Add(row);
+            }            
+        }
+        private void GenKey_Click(object sender, EventArgs e)
+        {
+            showKey();
+            if (dgvListKey != null)
+            {
+                radioEncryp.Enabled = true;
+                radioDecryp.Enabled = true;
+            }
         }
     }
 }
