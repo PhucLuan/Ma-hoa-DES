@@ -36,8 +36,10 @@ namespace MaHoaDES
         public static string EncrpytionDES(string K, string _M)
         {
             string C = "";
-
-
+            while (_M.Count() < 16)
+            {
+                _M = 0 + _M;
+            }
             string M = cvtHextToBina(_M);
             string IPM = transposition(M, IP); //Chuyển vị IP
             string L0 = IPM.Substring(0, 32);
@@ -85,6 +87,10 @@ namespace MaHoaDES
         {
             
             string C = "";
+            while (_M.Count() < 16)
+            {
+                _M = 0 + _M;
+            }
             string M = cvtHextToBina(_M);
             string IPM = transposition(M, IP); //Chuyển vị IP
             string L0 = IPM.Substring(0, 32);

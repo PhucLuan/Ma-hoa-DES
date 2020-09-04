@@ -18,7 +18,7 @@ namespace DEMO_DES
         {
             InitializeComponent();
         }
-        
+        public string check;
         private void btnEncrpytion_Click(object sender, EventArgs e)
         {
 
@@ -26,7 +26,17 @@ namespace DEMO_DES
             {
                 if (string.IsNullOrEmpty(txtBanRo.Text) == false && string.IsNullOrEmpty(txtKey.Text) == false)
                 {
-                    txtResult.Text = DesLibrary.EncrpytionDES(txtKey.Text.ToString(), txtBanRo.Text.ToString());
+                    dgvKeyLR.Rows.Clear();
+                    dgvKeyLR.Columns.Clear();
+                    check = DesLibrary.EncrpytionDES(txtKey.Text.ToString(), txtBanRo.Text.ToString());
+                    while (check.Count() < 16)
+                    {
+                        check = 0 + check;
+                    }
+                    if (check.Count() == 16)
+                    {
+                        txtResult.Text = check;
+                    }
                     showKeyLR();
                 }
                 else
@@ -38,7 +48,15 @@ namespace DEMO_DES
                 {
                     dgvKeyLR.Rows.Clear();
                     dgvKeyLR.Columns.Clear();
-                    txtResult.Text = DesLibrary.DecrpytionDES(txtKey.Text.ToString(), txtBanRo.Text.ToString());
+                    check = DesLibrary.DecrpytionDES(txtKey.Text.ToString(), txtBanRo.Text.ToString());
+                    while (check.Count() < 16)
+                    {
+                        check = 0 + check;
+                    }
+                    if (check.Count() == 16)
+                    {
+                        txtResult.Text = check;
+                    }
                     showKeyLR();
                 }
                 else
